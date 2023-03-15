@@ -1,5 +1,8 @@
-import {Column, DataType, Table, Model} from "sequelize-typescript";
+import {Column, DataType, Table, Model, BelongsToMany, HasMany} from "sequelize-typescript";
 import {ApiProperty} from "@nestjs/swagger"
+import {Roles} from "../roles/roles.model";
+import {UserRoles} from "../roles/user.roles";
+import {Post} from "../posts/post.model";
 
 interface UserCreationAttrs {
     email: string;
@@ -47,10 +50,42 @@ export class User extends Model<User, UserCreationAttrs> {
     @ApiProperty({example: 'За дачу не правильных данных',description: 'За что был заблокирован' })
     banReason: string;
 
-    first_name: string;
-    last_name: string;
-    phoneNumber: string;
-    address: string;
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    @ApiProperty({example: 'Таалай',description: 'Имя' })
+    first_name?: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    @ApiProperty({example: 'Алиев',description: 'Фамилия' })
+    last_name?: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    @ApiProperty({example: '+996504130622',description: 'Контактный номер телефона' })
+    phoneNumber?: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    @ApiProperty({example: 'Карыпжана 47',description: 'Контактный номер телефона' })
+    address?: string;
+
+
+    @BelongsToMany(() => Roles, ()=> UserRoles)
+    roles: Roles[];
+
+    @HasMany(() => Post)
+    posts: Post
+
+
 
 
 }
