@@ -1,6 +1,4 @@
-import {MiddlewareConsumer, Module, NestModule, RequestMethod} from "@nestjs/common";
-import {AppController} from "./app.controller";
-import {AppService} from "./app.service";
+import { Module, } from "@nestjs/common";
 import {SequelizeModule} from "@nestjs/sequelize";
 import {UsersModule} from './users/users.module';
 import {ConfigModule} from "@nestjs/config";
@@ -14,7 +12,11 @@ import { PostsModule } from './posts/posts.module';
 import {Post} from "./posts/post.model";
 import { FilesModule } from './files/files.module';
 import {ServeStaticModule} from "@nestjs/serve-static";
+import { ReportsModule } from './reports/reports.module';
+import { ChekModule } from './chek/chek.module';
 import * as path from "path";
+import { Check } from "./chek/chek.model";
+import { Report } from "./reports/reports.modele";
 
 @Module({
     controllers: [],
@@ -35,7 +37,7 @@ import * as path from "path";
             username: process.env.POSTGRES_USER,
             password: String(process.env.POSTGRES_PASSWORD),
             database: process.env.POSTGRES_DB,
-            models: [User, Roles, UserRoles, Post],
+            models: [User, Roles, UserRoles, Post, Report, Check],
             autoLoadModels: true
         }),
         UsersModule,
@@ -43,15 +45,8 @@ import * as path from "path";
         AuthModule,
         PostsModule,
         FilesModule,
+        ReportsModule,
+        ChekModule,
     ]
 })
-export class AppModule //implements NestModule
- {
-    // configure(consumer: MiddlewareConsumer){
-    //     consumer.apply(PreauthMiddleware).forRoutes(
-    //         {
-    //             path: "*",
-    //             method: RequestMethod.ALL
-    //         })
-    // }
-}
+export class AppModule{}
