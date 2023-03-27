@@ -20,7 +20,6 @@ import { Report } from "./reports/reports.modele";
 
 @Module({
     controllers: [],
-    providers: [],
     imports: [
         ConfigModule.forRoot({
             envFilePath: `.${process.env.NODE_ENV}.env`

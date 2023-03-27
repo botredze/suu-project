@@ -53,6 +53,4 @@ export class Check extends Model<Check, CheckCreationAttrs>{
   @Column({type: DataType.INTEGER})
   userId: number;
 
-
-
 }
