@@ -5,6 +5,8 @@ import {UserRoles} from "../roles/user.roles";
 import {Post} from "../posts/post.model";
 import { Report } from "../reports/reports.modele";
 import { Check } from "../chek/chek.model";
+import { Address } from "../address/address.model";
+import { UserDetails } from '../user-details/user-details.model';
 
 interface UserCreationAttrs {
     email: string;
@@ -52,34 +54,6 @@ export class User extends Model<User, UserCreationAttrs> {
     @ApiProperty({example: 'За дачу не правильных данных',description: 'За что был заблокирован' })
     banReason: string;
 
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    @ApiProperty({example: 'Таалай',description: 'Имя' })
-    first_name?: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    @ApiProperty({example: 'Алиев',description: 'Фамилия' })
-    last_name?: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    @ApiProperty({example: '+996504130622',description: 'Контактный номер телефона' })
-    phoneNumber?: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    @ApiProperty({example: 'Карыпжана 47',description: 'Контактный номер телефона' })
-    address?: string;
-
 
     @BelongsToMany(() => Roles, ()=> UserRoles)
     roles: Roles[];
@@ -92,4 +66,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
     @HasMany(()=> Check)
     check: Check
+
+    @HasOne(() => UserDetails)
+    userDetails: UserDetails[]
 }

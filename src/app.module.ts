@@ -17,6 +17,8 @@ import { ChekModule } from './chek/chek.module';
 import * as path from "path";
 import { Check } from "./chek/chek.model";
 import { Report } from "./reports/reports.modele";
+import { AddressModule } from './address/address.module';
+import { UserDetailsModule } from './user-details/user-details.module';
 
 @Module({
     controllers: [],
@@ -46,6 +48,8 @@ import { Report } from "./reports/reports.modele";
         FilesModule,
         ReportsModule,
         ChekModule,
+        AddressModule,
+        UserDetailsModule,
     ]
 })
 export class AppModule{}
