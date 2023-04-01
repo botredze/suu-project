@@ -62,7 +62,7 @@ export class User extends Model<User, UserCreationAttrs> {
     posts: Post
 
     @HasMany(()=> Report)
-    report: Report
+    report: Report[]
 
     @HasMany(()=> Check)
     check: Check

@@ -1,10 +1,10 @@
-import { Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
 import { User } from "../users/user.model";
 import {ApiProperty} from '@nestjs/swagger'
 interface UserDetailArrts {
 
 }
-
+@Table({tableName:'userDetails'})
 export class UserDetails extends Model<UserDetails, UserDetailArrts> {
 
     @Column({
@@ -12,7 +12,7 @@ export class UserDetails extends Model<UserDetails, UserDetailArrts> {
         unique: true,
         autoIncrement: true,
         primaryKey: true
-    
+
       })
       @ApiProperty({example: '1',description: 'Уникальный идентификатор адреса' })
     id: number;
@@ -22,14 +22,14 @@ export class UserDetails extends Model<UserDetails, UserDetailArrts> {
         allowNull: false,
       })
       @ApiProperty({example: 'Алиев ',description: 'Фамилия абонента' })
-    first_name: string; 
+    first_name: string;
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
       })
       @ApiProperty({example: 'Баатыр',description: 'Имя абонента' })
-    last_name: string; 
+    last_name: string;
 
     @Column({
         type: DataType.STRING,
@@ -43,7 +43,7 @@ export class UserDetails extends Model<UserDetails, UserDetailArrts> {
         allowNull: false,
       })
       @ApiProperty({example: '+996708 82 82 38 ',description: 'Рабочий номер телефона' })
-    phone_number: string; 
+    phone_number: string;
 
     @Column({
         type: DataType.STRING,
@@ -57,7 +57,7 @@ export class UserDetails extends Model<UserDetails, UserDetailArrts> {
         allowNull: false,
       })
       @ApiProperty({example: '9182903809823',description: 'Персональный номер абонента' })
-    persenal_number: string; 
+    persenal_number: string;
 
     @Column({
         type: DataType.STRING,
@@ -67,12 +67,15 @@ export class UserDetails extends Model<UserDetails, UserDetailArrts> {
       @ApiProperty({example: 'Entity',description: 'Тип лица Физ/Юр' })
     user_type:  UserType
 
+  @ForeignKey(() => User)
+  @Column({type: DataType.INTEGER})
+  userId: number;
 
-    @HasOne( () => User)
-    user_id: User
+  @BelongsTo ( ()=> User)
+  user: User
 }
 
 export enum UserType {
-    INDIVIDUAL = 'Individual', 
+    INDIVIDUAL = 'Individual',
     ENTITY = '™Entity'
 }

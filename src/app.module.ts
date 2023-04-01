@@ -19,9 +19,14 @@ import { Check } from "./chek/chek.model";
 import { Report } from "./reports/reports.modele";
 import { AddressModule } from './address/address.module';
 import { UserDetailsModule } from './user-details/user-details.module';
+import { PeriodModule } from './period/period.module';
+import { OldReportsModule } from './old_report/old-reports.module';
+import { OldReportService } from './old_report/old-report.service';
+import { OldReportController } from './old_report/old-report.controller';
+import { BillingModule } from './billing/billing.module';
 
 @Module({
-    controllers: [],
+    controllers: [OldReportController],
     imports: [
         ConfigModule.forRoot({
             envFilePath: `.${process.env.NODE_ENV}.env`
@@ -50,6 +55,10 @@ import { UserDetailsModule } from './user-details/user-details.module';
         ChekModule,
         AddressModule,
         UserDetailsModule,
-    ]
+        PeriodModule,
+        OldReportsModule,
+        BillingModule,
+    ],
+    providers: [OldReportService]
 })
 export class AppModule{}
