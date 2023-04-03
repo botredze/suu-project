@@ -2,13 +2,13 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { UserDetailsDto } from "./dto/user-details.dto";
 import { UserDetails, UserType } from "./user-details.model";
 import { InjectModel } from "@nestjs/sequelize";
+import { Address } from "src/address/address.model";
+import { AddressService } from "src/address/address.service";
 
 @Injectable()
 export class UserDetailsService {
 
-    constructor(@InjectModel(UserDetails) private userDetailsRepository: typeof UserDetails,) {
-
-    }
+    constructor(@InjectModel(UserDetails) private userDetailsRepository: typeof UserDetails,) {}
 
     async addUserDetails(dto: UserDetailsDto){
         const user = await this.userDetailsRepository.findByPk(dto.userId)
@@ -41,6 +41,7 @@ export class UserDetailsService {
             //user.persenal_number = dt
             user.phone_number = dto.phone_number;
             user.wa_phone_number = dto.wa_phone_number;
+
             await user.save()
         }
         return user

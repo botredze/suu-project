@@ -1,16 +1,16 @@
-import { Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
-import { User } from "../users/user.model";
+import { Column, DataType, HasMany, HasOne, Model, Table } from "sequelize-typescript";
 import {ApiProperty} from '@nestjs/swagger'
-
+import { UserDetails } from "src/user-details/user-details.model";
 interface AddressCreationArrts {
-  street: string;
-  home_number: string;
-  region: string;
-  area: string;
+    street: string;
+    home_number: number;
+    region: string;
+    area: string;
+    user_details_id: number;
 }
 
 @Table({tableName: 'address'})
-export class Address extends Model<Address> {
+export class Address extends Model<Address, AddressCreationArrts> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -39,6 +39,13 @@ export class Address extends Model<Address> {
     type: DataType.STRING,
     allowNull: false,
   })
+  @ApiProperty({example: 'Ой-Булак',description: 'Город или Село' })
+  city: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   @ApiProperty({example: 'Ыссык-Кол',description: 'Область' })
   region: string;
 
@@ -49,6 +56,6 @@ export class Address extends Model<Address> {
   @ApiProperty({example: 'Туп',description: 'Район' })
   area: string
 
-  @HasOne( () => User)
-  user_id: User
+  @HasOne( () => UserDetails)
+  userDetails: UserDetails[]
 }

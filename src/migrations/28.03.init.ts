@@ -1,5 +1,4 @@
-export
-async function up(queryInterface, {DataTypes}) {
+export async function up(queryInterface, {DataTypes}) {
   await queryInterface.createTable('users', {
     id: {
       type: DataTypes.BIGINT(20).UNSIGNED,

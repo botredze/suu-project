@@ -7,15 +7,15 @@ import { Roles } from "../roles/roles.model";
 import { UserRoles } from "../roles/user.roles";
 import { Report } from "../reports/reports.modele";
 import { Check } from "./chek.model";
+import { UsersService } from "../users/users.service";
 
 @Module({
   providers: [ChekService],
   controllers: [ChekController],
   imports: [
-    SequelizeModule.forFeature([User, Roles, UserRoles, Report, Check]),
+    SequelizeModule.forFeature([User, Roles, UserRoles, Report, Check])
   ],
   exports: [
-    ChekService,
-  ]
+    ChekService,]
 })
 export class ChekModule {}

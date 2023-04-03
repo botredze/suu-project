@@ -21,9 +21,12 @@ import { AddressModule } from './address/address.module';
 import { UserDetailsModule } from './user-details/user-details.module';
 import { PeriodModule } from './period/period.module';
 import { OldReportsModule } from './old_report/old-reports.module';
-import { OldReportService } from './old_report/old-report.service';
 import { OldReportController } from './old_report/old-report.controller';
 import { BillingModule } from './billing/billing.module';
+import { UserDetails } from "./user-details/user-details.model";
+import { Address } from "./address/address.model";
+import { Billing } from "./billing/billing.model";
+import { Period } from "./period/period.model";
 
 @Module({
     controllers: [OldReportController],
@@ -43,7 +46,7 @@ import { BillingModule } from './billing/billing.module';
             username: process.env.POSTGRES_USER,
             password: String(process.env.POSTGRES_PASSWORD),
             database: process.env.POSTGRES_DB,
-            models: [User, Roles, UserRoles, Post, Report, Check],
+            models: [User, Roles, UserRoles, Post, Report, Check, UserDetails, Address, Billing, Period],
             autoLoadModels: true
         }),
         UsersModule,
@@ -59,6 +62,5 @@ import { BillingModule } from './billing/billing.module';
         OldReportsModule,
         BillingModule,
     ],
-    providers: [OldReportService]
 })
 export class AppModule{}

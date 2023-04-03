@@ -12,8 +12,8 @@ export class AddressController {
   }
 
   @Post()
-  addNewAddress(dto: CreateAddressDto, email: string ) {
-    return this.addressService.createAddress(dto, email)
+  addNewAddress(dto: CreateAddressDto ) {
+    return this.addressService.createAddress(dto)
   }
 
 }

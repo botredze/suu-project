@@ -2,13 +2,10 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Check } from "./chek.model";
 import { CreateCheckDto } from "./dto/сreateCheckDto";
-import { UsersService } from "../users/users.service";
 
 @Injectable()
 export class ChekService {
-  constructor(@InjectModel(Check)
-              private checkRepository: typeof Check,
-              private userService: UsersService) {}
+  constructor(@InjectModel(Check) private checkRepository: typeof Check, ){}
  async create(dto: CreateCheckDto) {
     const check = await this.checkRepository.create(dto)
 
@@ -32,20 +29,20 @@ export class ChekService {
     return checkList
   }
 
-  async getCheckByUser (email: string) {
-    const user = await this.userService.getUserByEmail(email)
-    if(!user) {
-      throw  new HttpException('Пользователь не найден', HttpStatus.NOT_FOUND)
-    }
+  // async getCheckByUser (email: string) {
+  //   const user = await this.checkRepository.findByPk(email)
+  //   if(!user) {
+  //     throw  new HttpException('Пользователь не найден', HttpStatus.NOT_FOUND)
+  //   }
+  //
+  // }
+  //
+  // async  addUserToCheck (email: string) {
+  //   const user = await this.checkRepository.findByPk(email)
+  //   const  check = await this.getCheck()
+  //   await user.$set('check', [check.id]);
+  //
+  //   user.check = check
 
-  }
-
-  async  addUserToCheck (email: string) {
-    const user = await this.userService.getUserByEmail(email)
-    const  check = await this.getCheck()
-    await user.$set('check', [check.id]);
-
-    user.check = check
-
-  }
+  //}
 }

@@ -1,6 +1,7 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
 import { User } from "../users/user.model";
 import {ApiProperty} from '@nestjs/swagger'
+import { Address } from "src/address/address.model";
 interface UserDetailArrts {
 
 }
@@ -73,6 +74,13 @@ export class UserDetails extends Model<UserDetails, UserDetailArrts> {
 
   @BelongsTo ( ()=> User)
   user: User
+
+  @ForeignKey(() => Address)
+  @Column({type: DataType.INTEGER})
+  addressId: number
+
+  @BelongsTo(() => Address)
+  address: Address[]
 }
 
 export enum UserType {
