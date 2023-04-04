@@ -36,4 +36,12 @@ export class BillingService {
     }
     return updatedBilling
   }
+
+  async deleteBilling() {
+    return null
+  }
+
+  async updateBillingDto() {
+    return null
+  }
 }
